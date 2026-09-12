@@ -1,0 +1,888 @@
+/* ==========================================================================
+   Nudge - single stylesheet
+   Minimalist design system: tokens first, then layout, then components.
+   No CSS framework, no build plugins, nothing to configure.
+   ========================================================================== */
+
+:root {
+  --bg: #f6f8f9;
+  --surface: #ffffff;
+  --border: #e3e8ea;
+  --text: #16232b;
+  --muted: #5f7078;
+  --faint: #8b9aa1;
+
+  --primary: #0f766e;
+  --primary-dark: #0b5d57;
+  --primary-soft: #e6f2f1;
+
+  --danger: #b42318;
+  --danger-soft: #fdecea;
+
+  --low: #2563eb;
+  --low-soft: #e8effe;
+  --medium: #b45309;
+  --medium-soft: #fdf3e2;
+  --high: #b42318;
+  --high-soft: #fdecea;
+
+  --radius: 14px;
+  --radius-sm: 9px;
+  --shadow: 0 1px 2px rgba(16, 34, 40, 0.05), 0 8px 24px -12px rgba(16, 34, 40, 0.14);
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+  font-size: 15px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Shared building blocks
+   -------------------------------------------------------------------------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+.btn-ghost {
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  border-color: var(--faint);
+  color: var(--text);
+  background: #fff;
+}
+
+.btn-danger {
+  border-color: transparent;
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #fbdcd8;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Forms
+   -------------------------------------------------------------------------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.field .hint {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.field .error-text {
+  font-size: 12.5px;
+  color: var(--danger);
+  font-weight: 500;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--text);
+}
+
+.input:hover,
+.textarea:hover,
+.select:hover {
+  border-color: #cfd8dc;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.13);
+}
+
+.input.invalid,
+.textarea.invalid,
+.select.invalid {
+  border-color: var(--danger);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 74px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   Auth pages (login / signup)
+   -------------------------------------------------------------------------- */
+
+.auth-shell {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 28px 16px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px 28px;
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.wordmark {
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: var(--primary);
+}
+
+.tagline {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.auth-card h1 {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.auth-card .sub {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-top: 18px;
+}
+
+/* --------------------------------------------------------------------------
+   Dashboard
+   -------------------------------------------------------------------------- */
+
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topbar-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 13px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.topbar .wordmark {
+  font-size: 20px;
+}
+
+.topbar .tagline {
+  font-size: 12px;
+  margin-top: 0;
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-right: auto;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  color: var(--muted);
+  min-width: 0;
+}
+
+.user-name {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex: none;
+}
+
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 26px 20px 60px;
+  display: grid;
+  gap: 22px;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.section-head h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.section-head .count {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.filters {
+  display: inline-flex;
+  padding: 3px;
+  background: #eceff1;
+  border-radius: 10px;
+  gap: 2px;
+}
+
+.filters button {
+  border: none;
+  background: transparent;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.filters button.active {
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 1px 2px rgba(16, 34, 40, 0.1);
+}
+
+.filters button .pill {
+  font-size: 11.5px;
+  color: var(--faint);
+  margin-left: 5px;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   Reminder form panel
+   -------------------------------------------------------------------------- */
+
+.form-panel {
+  padding: 22px 24px 24px;
+}
+
+.form-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.form-panel-head h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Reminder cards
+   -------------------------------------------------------------------------- */
+
+.reminder-list {
+  display: grid;
+  gap: 12px;
+}
+
+.reminder-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding: 16px 18px;
+  align-items: start;
+  border-left: 4px solid var(--border);
+}
+
+.reminder-card.priority-LOW {
+  border-left-color: var(--low);
+}
+
+.reminder-card.priority-MEDIUM {
+  border-left-color: var(--medium);
+}
+
+.reminder-card.priority-HIGH {
+  border-left-color: var(--high);
+}
+
+.reminder-card.is-overdue {
+  background: #fffaf9;
+}
+
+.reminder-card.is-completed {
+  background: #fafbfc;
+  border-left-color: var(--border);
+}
+
+.reminder-card.is-completed .reminder-title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #c5d0d5;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  margin-top: 2px;
+  flex: none;
+}
+
+.check:hover {
+  border-color: var(--primary);
+}
+
+.check svg {
+  opacity: 0;
+  color: #fff;
+}
+
+.check.done {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.check.done svg {
+  opacity: 1;
+}
+
+.reminder-main {
+  /* Title and buttons share a row on desktop; on a phone the buttons drop to a
+     footer under the details, which reads better than a squeezed top row. */
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "title actions"
+    "notes notes"
+    "meta  meta";
+  column-gap: 12px;
+  align-items: start;
+}
+
+.reminder-title {
+  grid-area: title;
+}
+
+.reminder-actions {
+  grid-area: actions;
+}
+
+.reminder-notes {
+  grid-area: notes;
+}
+
+.reminder-meta {
+  grid-area: meta;
+}
+
+.reminder-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.reminder-notes {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 4px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.reminder-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 11px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.reminder-actions {
+  display: flex;
+  gap: 8px;
+  flex: none;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.badge.LOW {
+  background: var(--low-soft);
+  color: var(--low);
+}
+
+.badge.MEDIUM {
+  background: var(--medium-soft);
+  color: var(--medium);
+}
+
+.badge.HIGH {
+  background: var(--high-soft);
+  color: var(--high);
+}
+
+/* Status chips read as sentences, not shouts - only priority is uppercased. */
+.badge.state-done,
+.badge.state-pending,
+.badge.overdue {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.cat {
+  background: #eef1f3;
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.badge.state-done {
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+}
+
+.badge.state-pending {
+  background: #fff4e0;
+  color: #96630a;
+}
+
+.badge.overdue {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* --------------------------------------------------------------------------
+   Feedback: alerts, loader, empty state, alarm banner
+   -------------------------------------------------------------------------- */
+
+.alert {
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  border: 1px solid transparent;
+  margin-bottom: 16px;
+}
+
+.alert ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.alert-error {
+  background: var(--danger-soft);
+  border-color: #f6cdc7;
+  color: var(--danger);
+}
+
+.alert-info {
+  background: var(--primary-soft);
+  border-color: #c9e4e1;
+  color: var(--primary-dark);
+}
+
+.skeleton {
+  padding: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid #cfdcdc;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 46px 24px;
+  color: var(--muted);
+}
+
+.empty-state .icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.empty-state h3 {
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.empty-state p {
+  font-size: 13.5px;
+}
+
+.alarm-banner {
+  border: 1px solid #f3c9c3;
+  background: #fff6f4;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+}
+
+.alarm-banner h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.alarm-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.alarm-item .when {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.footnote {
+  font-size: 12.5px;
+  color: var(--faint);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  body {
+    font-size: 14.5px;
+  }
+
+  .topbar-inner {
+    padding: 11px 14px;
+    gap: 10px;
+  }
+
+  .topbar .tagline {
+    display: none;
+  }
+
+  /* Keep the header to one line on a phone: name and hints step aside. */
+  .topbar-user {
+    gap: 8px;
+  }
+
+  .topbar-user .user-name,
+  .topbar-user > .tagline {
+    display: none;
+  }
+
+  .topbar-user .btn {
+    padding: 8px 11px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .alarm-item {
+    flex-wrap: wrap;
+  }
+
+  .alarm-item .reminder-actions {
+    width: 100%;
+  }
+
+  .alarm-item .reminder-actions .btn {
+    flex: 1;
+    padding: 8px 12px;
+  }
+
+  .page {
+    padding: 20px 14px 48px;
+    gap: 18px;
+  }
+
+  .auth-card {
+    padding: 24px 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .reminder-card {
+    padding: 14px;
+    gap: 11px;
+  }
+
+  .reminder-main {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "title"
+      "notes"
+      "meta"
+      "actions";
+  }
+
+  .reminder-actions {
+    margin-top: 12px;
+  }
+
+  .reminder-actions .btn {
+    flex: 1;
+    padding: 8px 12px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters {
+    justify-content: space-between;
+  }
+
+  .filters button {
+    flex: 1;
+    padding: 7px 8px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Alarm controls row (next to the filters)
+   -------------------------------------------------------------------------- */
+
+.alarm-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.alarm-controls .btn {
+  padding: 8px 13px;
+  font-size: 13px;
+}
+
+.ai-panel { border: 1px solid rgba(124, 92, 255, 0.35); }
+.ai-panel .muted, .ai-result .muted { color: var(--muted, #777); }
+.ai-result { margin-top: 1rem; padding: 1rem; border-radius: 12px; background: rgba(124, 92, 255, 0.08); }

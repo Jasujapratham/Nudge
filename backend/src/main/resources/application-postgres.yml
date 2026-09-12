@@ -1,0 +1,40 @@
+# ==========================================================================
+# Nudge - OPTIONAL PostgreSQL configuration
+#
+# Use it only if PostgreSQL is installed on your laptop. Docker is NOT needed.
+#
+#   1. Create the database once (PowerShell):
+#        & "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres -c "CREATE DATABASE nudge;"
+#
+#   2. Adjust the username/password below (or set the environment variables
+#      POSTGRES_USER / POSTGRES_PASSWORD).
+#
+#   3. Start the backend with the "postgres" profile:
+#        mvn spring-boot:run "-Dspring-boot.run.profiles=postgres"
+#      or with the Maven Wrapper:
+#        .\mvnw.cmd spring-boot:run "-Dspring-boot.run.profiles=postgres"
+#
+#   4. Remove this file (or set nudge.jwt.secret) for anything public.
+# ==========================================================================
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:nudge}
+    driver-class-name: org.postgresql.Driver
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      # "update" adds missing tables/columns but never deletes them.
+      # Use "create-drop" during heavy development if you want a clean slate.
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+
+  h2:
+    console:
+      # H2 console is pointless when PostgreSQL is the database.
+      enabled: false
