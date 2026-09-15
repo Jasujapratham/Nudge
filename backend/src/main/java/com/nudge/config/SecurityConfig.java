@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Central Spring Security setup for the Nudge API.
  *
- * <p>Decisions worth being able to explain in an interview:</p>
+ *
  * <ul>
  *   <li>Stateless sessions - the JWT is the only credentials, so no HTTP session.</li>
  *   <li>CSRF disabled - CSRF attacks rely on cookies, and this API never uses them.</li>
